@@ -1,5 +1,5 @@
 ###########################################################################################
-# Day 1 
+# Day 1 :Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
 ###########################################################################################
 
 #Import text file lines to a character vector using readlines:
@@ -18,8 +18,34 @@ for(i in 1:length(input)) {
   }
 }
 
-#Part 1: Find the top elf:
+#Part 1: Find the top elf: 74394
 max(elve)
 
 #Part 2 : sum the top three elves.
 sum(sort(elve, decreasing = T)[1:3])
+
+############## Alternative base r formulation, without loops ########
+
+input |> 
+  as.integer() |> 
+  aggregate(by = list(cumsum(input == '')), 
+             FUN=sum, 
+             na.rm = T ) |> 
+  pull(x) |> 
+  sort(decreasing = T) |> 
+  head(3) |> 
+  sum()
+
+
+############## dplyr version ############## 
+input |> 
+  as.integer() |> 
+  as_tibble() |> 
+  group_by(cumsum(is.na(value))) |> 
+  filter(!is.na(value)) |> 
+  summarize( value=sum(value), na.rm = TRUE) |> 
+  arrange(value) |> 
+  head(3) |> 
+  sum()
+  
+  

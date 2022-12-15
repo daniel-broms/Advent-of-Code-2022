@@ -9,8 +9,7 @@ day11 <- function(){
   input <- readLines("Day 11/input.txt") 
   
   #Model as monkey objects? Or is each monkey a list with members?
-  
-  monkeys <- list()
+  monkeys  <- list()
   monkey  <- list()
   row <- 1
   
@@ -51,8 +50,7 @@ day11 <- function(){
   monkeys[[6]]$operation <- function(x) {x + 6}
   monkeys[[7]]$operation <- function(x) {x + 4}
   monkeys[[8]]$operation <- function(x) {x + 8}
-  
-  
+
   #run 20 rounds
   for(round in 1:20){
     
@@ -74,20 +72,14 @@ day11 <- function(){
         
         #throw the item
         monkeys[[to_monkey+1]]$items <- append(monkeys[[to_monkey+1]]$items, new_level)   
-        
-  
       }
       monkeys[[m+1]]$items <- list() #empty this monkey item list - all are throw.
-      
-      
     }
-  
   }
 
   for(m in 1:nr_of_monkeys){
     print(monkeys[[m]]$inspected_items)
   }
-  
 }
 
 make_test <- function(x){

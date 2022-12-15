@@ -8,7 +8,6 @@ library(rlang)
 #input <- readLines("Day 13/input.txt") 
 input <- readLines("Day 13/test input.txt") 
 
-
 #Import input into pairs of lists. (8 for test input).
 processinput <- function(input){
   row <- 1
@@ -25,12 +24,10 @@ processinput <- function(input){
     
     if(compare_lists(l1, l2) == "Yes") index_sum <- index_sum + pair
     print(index_sum)  #5717
-  
   }
 }
 
 #Compare two lists according to rules. Return "Yes" if  correct order, No" if wrong order, "Equal" if , for each pair.
-#Is this recursive, so that we call this function again for sub-lists?
 compare_lists <-function(left, right){
   
   #Compare left and right lists one element at a time. Compare sub-lists recursively.
@@ -106,17 +103,12 @@ input <- bubble_sort(input)
 #Find indexes of divisors after ordering packets
 match("[[2]]" , input) * match("[[6]]" , input)  #25935
 
-#bubble sort where we use compare_lists() as customer comparator:
-bubble_sort <- function(x)
-{
-  # calculate the length of array
+#bubble sort where we use compare_lists() as custom comparator:
+bubble_sort <- function(x){
   n <- length(x)
-  # run loop n-1 times
   for (i in 1 : (n - 1)) {
-    # run loop (n-i) times
     for (j in 1 : (n - i)) {
       # compare elements
-      #if (x[j] > x[j + 1]) {
       if(compare_lists(str_to_list(x[j]), str_to_list(x[j + 1]) ) == "No") {
         temp <- x[j]
         x[j] <- x[j + 1]
